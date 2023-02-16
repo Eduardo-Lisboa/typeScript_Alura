@@ -6,12 +6,12 @@ export class Negociacoes {
     private negociacoes: Array<Negociacao> = [];
 
     //metodo adiciona que recebe uma negociacao
-    adiciona(negociacao: Negociacao) {
+    public adiciona(negociacao: Negociacao) {
         this.negociacoes.push(negociacao);
     }
 
     //metodo lista que retorna um array de negociacoes do tipo readonly para que nao seja possivel alterar o array
-    lista(): ReadonlyArray<Negociacao> {
+    public lista(): ReadonlyArray<Negociacao> {
         return this.negociacoes;
     }
 }

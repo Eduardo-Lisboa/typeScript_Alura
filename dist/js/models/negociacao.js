@@ -1,11 +1,13 @@
 export class Negociacao {
+    //metodo construtor que recebe os atributos data, quantidade e valor
     constructor(data, quantidade, valor) {
         this._data = data;
         this._quantidade = quantidade;
         this._valor = valor;
     }
     get data() {
-        return this._data;
+        const data = new Date(this._data.getTime());
+        return data;
     }
     get quantidade() {
         return this._quantidade;
