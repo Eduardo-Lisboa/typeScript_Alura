@@ -1,3 +1,4 @@
+import { logarTempoDeExecucao } from "../decorators/logar-tempo-de-execucao.js";
 import { DiaDaSemana } from "../enums/dias-da-semana.js";
 import { Negociacao } from "../models/negociacao.js";
 import { Negociacoes } from "../models/neogciacoes.js";
@@ -9,20 +10,23 @@ export class NegociacaoController {
     // atributos que recebem os dados do formulario
     private inputData: HTMLInputElement;
     private inputQuantidade: HTMLInputElement;
-    private inputValor?: HTMLInputElement;
+    private inputValor: HTMLInputElement;
     private negociacoes = new Negociacoes();
-    private negociacoesView = new NegociacoesView("#negociacoesView");
+    private negociacoesView = new NegociacoesView("#negociacoesView", true);
     private mensagemView = new MensagemView("#mensagemView");
 
     //metodo construtor que recebe os dados do formulario
     constructor() {
-        this.inputData = document.querySelector("#data");
-        this.inputQuantidade = document.querySelector("#quantidade");
-        this.inputValor = document.querySelector("#valor");
+        this.inputData = document.querySelector("#data") as HTMLInputElement;
+        this.inputQuantidade = document.querySelector(
+            "#quantidade"
+        ) as HTMLInputElement;
+        this.inputValor = document.querySelector("#valor") as HTMLInputElement;
         this.negociacoesView.update(this.negociacoes);
     }
 
     //metodo adiciona que adiciona uma negociacao a lista de negociacoes
+    @logarTempoDeExecucao()
     public adiciona(): void {
         const negociacao = Negociacao.CriaDe(
             this.inputData.value,
