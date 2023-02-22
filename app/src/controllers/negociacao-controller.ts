@@ -1,3 +1,4 @@
+import { inspect } from "../decorators/inspect.js";
 import { logarTempoDeExecucao } from "../decorators/logar-tempo-de-execucao.js";
 import { DiaDaSemana } from "../enums/dias-da-semana.js";
 import { Negociacao } from "../models/negociacao.js";
@@ -12,7 +13,7 @@ export class NegociacaoController {
     private inputQuantidade: HTMLInputElement;
     private inputValor: HTMLInputElement;
     private negociacoes = new Negociacoes();
-    private negociacoesView = new NegociacoesView("#negociacoesView", true);
+    private negociacoesView = new NegociacoesView("#negociacoesView");
     private mensagemView = new MensagemView("#mensagemView");
 
     //metodo construtor que recebe os dados do formulario
@@ -26,7 +27,8 @@ export class NegociacaoController {
     }
 
     //metodo adiciona que adiciona uma negociacao a lista de negociacoes
-    @logarTempoDeExecucao()
+    @inspect
+    @logarTempoDeExecucao(true)
     public adiciona(): void {
         const negociacao = Negociacao.CriaDe(
             this.inputData.value,
