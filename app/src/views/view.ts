@@ -1,6 +1,3 @@
-import { inspect } from "../decorators/inspect.js";
-import { logarTempoDeExecucao } from "../decorators/logar-tempo-de-execucao.js";
-
 // Classe abstrata para ser herdada por outras classes
 export abstract class View<T> {
     // T (t se remete a type)é um tipo generico que pode ser qualquer coisa

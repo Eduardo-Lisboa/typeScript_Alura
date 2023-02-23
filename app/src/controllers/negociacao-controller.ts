@@ -5,6 +5,7 @@ import { DiaDaSemana } from "../enums/dias-da-semana.js";
 import { Negociacao } from "../models/negociacao.js";
 import { Negociacoes } from "../models/neogciacoes.js";
 import { NegociacoesServices } from "../services/negociacoes-services.js";
+import { imprimir } from "../utils/imprimir.js";
 import { NegociacoesView } from "../views/negociacoes-view.js";
 import { MensagemView } from "./../views/mensagem.view.js";
 
@@ -45,17 +46,29 @@ export class NegociacaoController {
             return;
         }
         this.negociacoes.adiciona(negociacao);
+        imprimir(negociacao, this.negociacoes);
         this.limparFormulario();
         this.autializaView();
     }
 
     public importarDados(): void {
-        this.negociacaoService.obterNegociacoes().then((negociacoesDeHoje) => {
-            for (let negociacao of negociacoesDeHoje) {
-                this.negociacoes.adiciona(negociacao);
-            }
-            this.negociacoesView.update(this.negociacoes);
-        });
+        this.negociacaoService
+            .obterNegociacoes()
+            .then((negociacoesDeHoje) => {
+                return negociacoesDeHoje.filter((negociacaoDeHoje) => {
+                    return !this.negociacoes
+                        .lista()
+                        .some((negociacao) =>
+                            negociacao.ehIgual(negociacaoDeHoje)
+                        );
+                });
+            })
+            .then((negociacoesDeHoje) => {
+                for (let negociacao of negociacoesDeHoje) {
+                    this.negociacoes.adiciona(negociacao);
+                }
+                this.negociacoesView.update(this.negociacoes);
+            });
     }
 
     private ehDiaUtil(data: Date): boolean {
