@@ -51,9 +51,11 @@ export class NegociacaoController {
         this.autializaView();
     }
 
+    //metodo importarDados que importa os dados da api
     public importarDados(): void {
         this.negociacaoService
             .obterNegociacoes()
+            //filter para verificar se a negociacao ja existe na lista de negociacoes
             .then((negociacoesDeHoje) => {
                 return negociacoesDeHoje.filter((negociacaoDeHoje) => {
                     return !this.negociacoes

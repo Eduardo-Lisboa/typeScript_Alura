@@ -1,3 +1,4 @@
+// Decorator para escapar o código HTML de uma string
 export function escape(
     target: any,
     propertyKey: string,

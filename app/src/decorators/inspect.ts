@@ -1,3 +1,4 @@
+// Decorator para imprimir informações sobre o método que foi chamado
 export function inspect(
     target: any,
     propertyKey: string,

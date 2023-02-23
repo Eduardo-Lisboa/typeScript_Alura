@@ -1,3 +1,4 @@
+// Decorator de classe para logar o tempo de execução de um método
 export function logarTempoDeExecucao(emSegundos: boolean = false) {
     return function (
         target: any,

@@ -1,3 +1,4 @@
+// Decorator para injetar elementos do DOM em propriedades de classes
 export function domInjector(selector: string) {
     return function (target: any, propertyKey: string) {
         let elemento: HTMLElement;
